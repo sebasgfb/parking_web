@@ -17,5 +17,5 @@ class Lugar(models.Model):
 class Reserva(models.Model):
     lugar = models.ForeignKey(Lugar, on_delete=models.CASCADE)
     cliente = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    fecha_reserva = models.DateTimeField(auto_now_add=True)
+    fecha_reserva = models.DateTimeField(null=True, blank=True)
     fecha_liberacion = models.DateTimeField(null=True, blank=True)

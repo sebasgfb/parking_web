@@ -3,6 +3,17 @@
 {% block title %}Iniciar Sesión{% endblock %}
 
 {% block content %}
+<style>
+    .centered-form {
+        display: flex;
+        justify-content: center;
+    }
+    .card {
+        width: 50%; /* O el ancho que prefieras */
+        margin: auto; /* Esto centra la tarjeta horizontalmente */
+    }
+</style>
+<div class="centered-form">
     <div class="card">
         <div class="card-header">
             <h2 class="card-title">Iniciar Sesión</h2>
@@ -10,9 +21,17 @@
         <div class="card-body">
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                <div class="form-group">
+                    <label for="id_usuario">Usuario:</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group mt-3">
+                    <label for="id_contraseña">Contraseña:</label>
+                    {{ form.password }}
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Iniciar Sesión</button>
             </form>
         </div>
     </div>
+</div>
 {% endblock %}

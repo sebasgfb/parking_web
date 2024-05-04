@@ -39,11 +39,21 @@ def registrar_usuario(request):
 
 @login_required
 
+@login_required
 def panel(request):
     usuario = request.user
     reservas = Reserva.objects.filter(cliente=usuario)
-    lugares_disponibles = Lugar.objects.filter(estado='libre')  # Obtener lugares disponibles
-    return render(request, 'panel.html', {'reservas': reservas, 'lugares_disponibles': lugares_disponibles})
+    ubicaciones = Lugar.objects.values('ubicacion').distinct()  # Obtener todas las ubicaciones
+    ubicaciones_con_lugares = []
+    
+    for ubicacion in ubicaciones:
+        lugares = Lugar.objects.filter(ubicacion=ubicacion['ubicacion'])
+        ubicaciones_con_lugares.append({
+            'ubicacion': ubicacion['ubicacion'],
+            'lugares': lugares
+        })
+    
+    return render(request, 'panel.html', {'reservas': reservas, 'ubicaciones': ubicaciones_con_lugares})
 
 def cerrar_sesion(request):
     logout(request)
