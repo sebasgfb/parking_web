@@ -1,61 +1,57 @@
-{% extends 'base.html' %}
-
-{% block title %}Panel de Usuario{% endblock %}
-
-{% block content %}
-<div class="container">
-    <div class="row justify-content-center align-items-center" >
-        <div class="col-md-8 text-center">
-            <h1>Bienvenido al Panel de Usuario</h1>
-            <!-- Mostrar ubicaciones como botones Bootstrap -->
-            <div class="mt-4">
-                <h2>Parking Spots</h2>
-                {% for ubicacion in ubicaciones %}
-                    <button type="button" class="btn btn-primary ubicacion-btn m-2" data-ubicacion="{{ ubicacion.ubicacion }}">{{ ubicacion.ubicacion }}</button>
-                {% endfor %}
-            </div>
-
-            <!-- Mostrar lugares libres y ocupados -->
-            <div id="lugares-container" class="mt-4" style="display: none;">
-                <h2>Lugares</h2>
-                {% for ubicacion in ubicaciones %}
-                    <div id="ubicacion-{{ ubicacion.ubicacion }}" class="ubicacion-lugares" style="display: none;">
-                        <h3>Parking Spot - {{ ubicacion.ubicacion }}</h3>
-                        <div class="btn-group" role="group" aria-label="Lugares">
-                            {% for lugar in ubicacion.lugares %}
-                                <button type="button" class="btn btn-dark {{ lugar.estado }}">{{ lugar.numero }} - {{ lugar.estado }}</button>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            
+{% extends 'base.html' %} {% block title %}
+  Panel de Usuario
+{% endblock %} {% block content %}
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-8 text-center">
+        <h1>Bienvenido al Panel de Usuario</h1>
+        <!-- Mostrar ubicaciones como botones Bootstrap -->
+        <div class="mt-4">
+          <h2>Parking Spots</h2>
+          {% for ubicacion in ubicaciones %}
+            <button type="button" class="btn btn-primary ubicacion-btn m-2" data-ubicacion="{{ ubicacion.ubicacion }}">{{ ubicacion.ubicacion }}</button>
+          {% endfor %}
         </div>
+
+        <!-- Mostrar lugares libres y ocupados -->
+        <div id="lugares-container" class="mt-4" style="display: none">
+          <h2>Lugares</h2>
+          {% for ubicacion in ubicaciones %}
+            <div id="ubicacion-{{ ubicacion.ubicacion }}" class="ubicacion-lugares" style="display: none">
+              <h3>Parking Spot - {{ ubicacion.ubicacion }}</h3>
+              <div class="btn-group" role="group" aria-label="Lugares">
+                {% for lugar in ubicacion.lugares %}
+                  <button type="button" class="btn btn-dark {{ lugar.estado }}">{{ lugar.numero }} - {{ lugar.estado }}</button>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-
-<script>
+  <script>
     // Manejo del clic en los botones de ubicación
     document.addEventListener('DOMContentLoaded', function () {
-        var ubicacionBtns = document.querySelectorAll('.ubicacion-btn');
-        ubicacionBtns.forEach(function (btn) {
-            btn.addEventListener('click', function (event) {
-                var ubicacionNombre = this.getAttribute('data-ubicacion');
-                mostrarLugares(ubicacionNombre);
-            });
-        });
-    });
-
+      var ubicacionBtns = document.querySelectorAll('.ubicacion-btn')
+      ubicacionBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (event) {
+          var ubicacionNombre = this.getAttribute('data-ubicacion')
+          mostrarLugares(ubicacionNombre)
+        })
+      })
+    })
+    
     function mostrarLugares(ubicacionNombre) {
-        var ubicacionesContainer = document.getElementById('lugares-container');
-        var ubicacionesLugares = document.querySelectorAll('.ubicacion-lugares');
-        ubicacionesLugares.forEach(function (ubicacion) {
-            ubicacion.style.display = 'none';
-        });
-        var ubicacionActual = document.getElementById('ubicacion-' + ubicacionNombre);
-        ubicacionActual.style.display = 'block';
-        ubicacionesContainer.style.display = 'block';
+      var ubicacionesContainer = document.getElementById('lugares-container')
+      var ubicacionesLugares = document.querySelectorAll('.ubicacion-lugares')
+      ubicacionesLugares.forEach(function (ubicacion) {
+        ubicacion.style.display = 'none'
+      })
+      var ubicacionActual = document.getElementById('ubicacion-' + ubicacionNombre)
+      ubicacionActual.style.display = 'block'
+      ubicacionesContainer.style.display = 'block'
     }
-</script>
+  </script>
 {% endblock %}
