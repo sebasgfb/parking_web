@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel de Usuario{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Bienvenido al Panel de Usuario</h1>
+    <p>Este es un contenido de ejemplo para la página de panel.</p>
+    <p>¡Puedes agregar más contenido según sea necesario para tu aplicación!</p>
+    <a href="{% url 'cerrar_sesion' %}" class="btn btn-danger">Cerrar Sesión</a>
+
+    <div class="mt-4">
+        <h2>Lugares Disponibles</h2>
+        <ul>
+            {% for lugar in lugares_disponibles %}
+                <li>{{ lugar.numero }} - {{ lugar.estado }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

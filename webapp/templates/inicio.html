@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Página de Inicio{% endblock %}
+
+{% block content %}
+    <h1>Bienvenido a nuestro sistema de estacionamiento</h1>
+    <p>Por favor, inicia sesión o regístrate para continuar:</p>
+    <a href="{% url 'iniciar_sesion' %}" class="btn btn-primary">Iniciar Sesión</a>
+    <a href="{% url 'registrar_usuario' %}" class="btn btn-secondary">Registrar Usuario</a>
+{% endblock %}
