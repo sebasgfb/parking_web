@@ -36,9 +36,6 @@ def registrar_usuario(request):
     return render(request, 'registrar_usuario.html', {'form': form})
 
 
-
-@login_required
-
 @login_required
 def panel(request):
     usuario = request.user
