@@ -19,11 +19,10 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             {% if user.is_authenticated and user.is_staff %}
-              <a href="{% url 'panel' %}" class="btn btn-outline-success mx-2">Lugares</a>
-              <a href="{% url 'panel' %}" class="btn btn-outline-success mx-2">Reservas</a>
+              <a href="{% url 'panel' %}" class="btn btn-outline-success mx-2">Panel</a>
             {% endif %} {% if user.is_authenticated %}
               <li class="nav-item">
-                <a href="{% url 'panel' %}" class="btn btn-outline-primary mx-2">Panel</a>
+                <a href="#" class="btn btn-outline-primary mx-2">Ubicaciones</a>
               </li>
               <li class="nav-item">
                 <form action="{% url 'cerrar_sesion' %}" method="post" class="d-inline">

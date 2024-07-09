@@ -3,15 +3,13 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 
-class PerfilUsuario(models.Model):
-    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    campopersonalizado = models.CharField(max_length=100)
+class Ubicacion(models.Model):
+    nombre = models.CharField(max_length=100)
 
 class Lugar(models.Model):
-    
     numero = models.CharField(max_length=50)
     estado = models.CharField(max_length=20, default="libre")
-    ubicacion = models.CharField(max_length=100)
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
 
 
 class Reserva(models.Model):

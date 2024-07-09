@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import PerfilUsuario, Lugar, Reserva
+from .models import  Lugar, Reserva, Ubicacion
 
-admin.site.register(PerfilUsuario)
 admin.site.register(Lugar)
 admin.site.register(Reserva)
+admin.site.register(Ubicacion)
+
