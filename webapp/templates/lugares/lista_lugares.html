@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Lugares de {{ ubicacion.nombre }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Lugares de {{ ubicacion.nombre }}</h1>
+    <ul class="list-group">
+        {% for lugar in lugares %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'detalle_lugar' lugar.id %}">Lugar {{ lugar.numero }} - Estado: {{ lugar.estado }}</a>
+            {% if user.is_authenticated and user.is_staff %}
+            <a href="{% url 'eliminar_lugar' lugar.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated and user.is_staff %}
+    <a href="{% url 'crear_lugar' ubicacion.id %}" class="btn btn-primary btn-sm mt-3">Crear Lugar</a>
+    {% endif %}
+
+    <a href="{% url 'lista_ubicaciones' %}" class="btn btn-secondary btn-sm mt-3">Volver a Ubicaciones</a>
+</div>
+{% endblock %}

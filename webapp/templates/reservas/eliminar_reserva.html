@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Reserva{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Eliminar Reserva</h1>
+    <p>¿Estás seguro de que deseas eliminar la reserva desde {{ reserva.fecha_reserva }} hasta {{ reserva.fecha_liberacion }} del lugar {{ reserva.lugar.numero }}?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'detalle_lugar' reserva.lugar.id %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

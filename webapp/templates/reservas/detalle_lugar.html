@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles del Lugar {{ lugar.numero }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Reservas del Lugar {{ lugar.numero }}</h1>
+    <h2 class="mt-4">Crear Nueva Reserva</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-sm">Reservar</button>
+        <a href="{% url 'lista_lugares' lugar.ubicacion.id %}" class="btn btn-secondary btn-sm">Volver a Lugares de {{ lugar.ubicacion.nombre}}</a>
+    </form>
+
+    
+    {% if reservas %}
+    <h2>Reservas Existentes</h2>
+    <ul class="list-group">
+        {% for reserva in reservas %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Reserva desde {{ reserva.fecha_reserva }} hasta {{ reserva.fecha_liberacion }} - Cliente: {{ reserva.cliente.username }}
+            {% if user.is_authenticated and user.is_staff %}
+            <a href="{% url 'eliminar_reserva' reserva.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    
+</div>
+{% endblock %}

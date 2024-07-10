@@ -1,5 +1,5 @@
 from django import forms
-from .models import Reserva
+from .models import Reserva, Ubicacion, Lugar
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -17,3 +17,22 @@ class CustomUserCreationForm(UserCreationForm):
             'password2': 'Confirmar contraseña',
         }
 
+
+class LugarForm(forms.ModelForm):
+    class Meta:
+        model = Lugar
+        fields = ['numero', 'estado']
+
+class UbicacionForm(forms.ModelForm):
+    class Meta:
+        model = Ubicacion
+        fields = ['nombre']
+
+class ReservaForm(forms.ModelForm):
+    class Meta:
+        model = Reserva
+        fields = ['fecha_reserva', 'fecha_liberacion']
+        widgets = {
+            'fecha_reserva': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'fecha_liberacion': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }

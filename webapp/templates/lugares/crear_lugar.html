@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Lugar{% endblock %}
+
+{% block content %}
+<h1>Crear Lugar en {{ ubicacion.nombre }}</h1>
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="numero" class="form-label">Número del Lugar</label>
+    <input type="number" class="form-control" id="numero" name="numero" required>
+  </div>
+  <div class="mb-3">
+    <label for="estado" class="form-label">Estado</label>
+    <select class="form-control" id="estado" name="estado">
+      <option value="Libre">Libre</option>
+      <option value="Ocupado">Ocupado</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Crear</button>
+  <a href="{% url 'lista_lugares' ubicacion.id %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Ubicaciones{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Ubicaciones</h1>
+    <div class="row">
+        {% for ubicacion in ubicaciones %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <a href="{% url 'lista_lugares' ubicacion.id %}">{{ ubicacion.nombre }}</a>
+                    {% if user.is_authenticated and user.is_staff %}
+                    <a href="{% url 'eliminar_ubicacion' ubicacion.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated and user.is_staff %}
+    <a href="{% url 'crear_ubicacion' %}" class="btn btn-primary">Crear Ubicación</a>
+    {% endif %}
+</div>
+{% endblock %}

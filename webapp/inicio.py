@@ -5,13 +5,13 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 
 def inicio(request):
-    return render(request, 'inicio.html')
+    return render(request, 'inicio/inicio.html')
 
 def panel(request):
-    return render(request, 'panel.html')
+    return render(request, 'inicio/panel.html')
 
 def bienvenida(request):
-    return render(request, 'bienvenida.html')
+    return render(request, 'inicio/bienvenida.html')
 
 def iniciar_sesion(request):
     if request.method == 'POST':
@@ -25,7 +25,7 @@ def iniciar_sesion(request):
                 return redirect('bienvenida')
     else:
         form = AuthenticationForm()
-    return render(request, 'iniciar_sesion.html', {'form': form})
+    return render(request, 'inicio/iniciar_sesion.html', {'form': form})
 
 def registrar_usuario(request):
     if request.method == 'POST':
@@ -36,7 +36,7 @@ def registrar_usuario(request):
             return redirect('bienvenida')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'registrar_usuario.html', {'form': form})
+    return render(request, 'inicio/registrar_usuario.html', {'form': form})
 
 @login_required
 def cerrar_sesion(request):
