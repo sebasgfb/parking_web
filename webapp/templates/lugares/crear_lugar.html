@@ -4,6 +4,18 @@
 
 {% block content %}
 <h1>Crear Lugar en {{ ubicacion.nombre }}</h1>
+
+{% if messages %}
+<div class="alert alert-dismissible {% if messages.tags %}alert-{{ messages.tags }}{% endif %}">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
 <form method="post">
   {% csrf_token %}
   <div class="mb-3">

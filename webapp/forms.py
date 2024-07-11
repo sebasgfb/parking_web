@@ -17,7 +17,6 @@ class CustomUserCreationForm(UserCreationForm):
             'password2': 'Confirmar contraseña',
         }
 
-
 class LugarForm(forms.ModelForm):
     class Meta:
         model = Lugar
