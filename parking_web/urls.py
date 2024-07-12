@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from webapp import inicio, ubicaciones, lugares, reservas
 
 urlpatterns = [
@@ -21,4 +21,5 @@ urlpatterns = [
     path('lugar/<int:lugar_id>/reservas', reservas.detalle_lugar, name='detalle_lugar'),
     path('reservas/eliminar/<int:reserva_id>/', reservas.eliminar_reserva, name='eliminar_reserva'),
     path('reservas/modificar/<int:reserva_id>/', reservas.modificar_reserva, name='modificar_reserva'),
+    path('api/', include('parking_web.urls_api')), 
 ]

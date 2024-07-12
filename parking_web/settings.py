@@ -27,7 +27,27 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8081',
+    'http://10.10.10.3:8081', 
+    'exp://10.10.10.3:8081', 
+    'http://localhost:19006',  
+    'http://127.0.0.1:19006',
+    'http://10.10.10.2:19000',  # Reemplaza con la IP de tu dispositivo
+    'http://10.10.10.2:19001',  # También puedes necesitar esta para Expo
+    'exp://10.10.10.2:19000',   # Para el modo de depuración de Expo
+    'exp://10.10.10.2:19001',
+]
 
+# Ajusta esto según tus necesidades
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,12 +57,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webapp'
+    'webapp',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
