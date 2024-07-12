@@ -56,3 +56,22 @@ def eliminar_lugar(request, lugar_id):
         return redirect('lista_lugares', ubicacion_id=ubicacion_id)
     return render(request, 'lugares/eliminar_lugar.html', {'lugar': lugar})
 
+# Vista para modificar un lugar (solo para administradores)
+@login_required
+@user_passes_test(is_admin)
+def modificar_lugar(request, lugar_id):
+    lugar = get_object_or_404(Lugar, id=lugar_id)
+    ubicacion = lugar.ubicacion
+    if request.method == 'POST':
+        nuevo_numero = request.POST.get('nuevo_numero')
+        if nuevo_numero:
+            if Lugar.objects.filter(ubicacion=ubicacion, numero=nuevo_numero).exists():
+                messages.error(request, 'Ya existe un lugar con este número en esta ubicación.')
+            else:
+                lugar.numero = nuevo_numero
+                lugar.save()
+                messages.success(request, 'Número de lugar actualizado exitosamente.')
+                return redirect('lista_lugares', ubicacion_id=ubicacion.id)
+        else:
+            messages.error(request, 'El nuevo número de lugar no puede estar vacío.')
+    return render(request, 'lugares/modificar_lugar.html', {'lugar': lugar, 'ubicacion': ubicacion})

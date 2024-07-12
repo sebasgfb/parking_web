@@ -41,3 +41,21 @@ def eliminar_ubicacion(request, ubicacion_id):
         messages.success(request, "Ubicación eliminada exitosamente.")
         return redirect('lista_ubicaciones')
     return render(request, 'ubicaciones/eliminar_ubicacion.html', {'ubicacion': ubicacion})
+
+@login_required
+@user_passes_test(is_admin)
+def modificar_ubicacion(request, ubicacion_id):
+    ubicacion = get_object_or_404(Ubicacion, id=ubicacion_id)
+    if request.method == 'POST':
+        nuevo_nombre = request.POST.get('nuevo_nombre')
+        if nuevo_nombre:
+            if Ubicacion.objects.filter(nombre=nuevo_nombre).exists():
+                messages.error(request, "Ya existe una ubicación con este nombre.")
+            else:
+                ubicacion.nombre = nuevo_nombre
+                ubicacion.save()
+                messages.success(request, "Nombre de ubicación actualizado exitosamente.")
+                return redirect('lista_ubicaciones')
+        else:
+            messages.error(request, "El nuevo nombre de la ubicación no puede estar vacío.")
+    return render(request, 'ubicaciones/modificar_ubicacion.html', {'ubicacion': ubicacion})
