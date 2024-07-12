@@ -12,4 +12,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('ubicaciones/<int:pk>/lugares/', LugarViewSet.as_view({'get': 'ubicaciones'}), name='lugares-por-ubicacion'),
 ]

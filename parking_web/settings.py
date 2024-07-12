@@ -29,13 +29,13 @@ ALLOWED_HOSTS = []
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8081',
-    'http://10.10.10.3:8081', 
-    'exp://10.10.10.3:8081', 
-    'http://localhost:19006',  
+    'http://10.10.10.3:8081',
+    'exp://10.10.10.3:8081',
+    'http://localhost:19006',
     'http://127.0.0.1:19006',
-    'http://10.10.10.2:19000',  # Reemplaza con la IP de tu dispositivo
-    'http://10.10.10.2:19001',  # También puedes necesitar esta para Expo
-    'exp://10.10.10.2:19000',   # Para el modo de depuración de Expo
+    'http://10.10.10.2:19000',
+    'http://10.10.10.2:19001',
+    'exp://10.10.10.2:19000',
     'exp://10.10.10.2:19001',
 ]
 

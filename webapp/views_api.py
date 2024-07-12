@@ -46,6 +46,12 @@ class LugarViewSet(viewsets.ModelViewSet):
     queryset = Lugar.objects.all()
     serializer_class = LugarSerializer
 
+    @action(detail=True, methods=['get'], url_path='lugares')
+    def ubicaciones(self, request, pk=None):
+        lugares = Lugar.objects.filter(ubicacion=pk)
+        serializer = self.get_serializer(lugares, many=True)
+        return Response(serializer.data)
+
 class ReservaViewSet(viewsets.ModelViewSet):
     queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
@@ -54,14 +60,3 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all() # Filtrar solo usuarios no administradores
     serializer_class = UserSerializer
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.filter(is_superuser=False) # Filtrar solo usuarios no administradores
-    serializer_class = UserSerializer
-
-    @action(detail=False, methods=['post'], serializer_class=LoginSerializer)
-    def login(self, request):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        login(request, user)
-        return Response(UserSerializer(user).data)
