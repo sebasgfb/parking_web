@@ -52,6 +52,12 @@ class LugarViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(lugares, many=True)
         return Response(serializer.data)
 
+    @action(detail=True, methods=['get'], url_path='reservas')
+    def reservas(self, request, pk=None):
+        reservas = Reserva.objects.filter(lugar=pk)
+        serializer = ReservaSerializer(reservas, many=True)
+        return Response(serializer.data)
+
 class ReservaViewSet(viewsets.ModelViewSet):
     queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
