@@ -17,6 +17,7 @@ class ReservaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reserva
         fields = '__all__'
+        read_only_fields = ['cliente']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

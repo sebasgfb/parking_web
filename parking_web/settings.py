@@ -25,30 +25,23 @@ SECRET_KEY = 'django-insecure-n$qc-3st$2#-$7d4qdbxhfco!w^($v81(tgcxhm6-jv&uk0kq1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_METHODS = ['*']
+
 ALLOWED_HOSTS = []
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8081',
-    'http://10.10.10.3:8081',
-    'exp://10.10.10.3:8081',
-    'http://localhost:19006',
-    'http://127.0.0.1:19006',
-    'http://10.10.10.2:19000',
-    'http://10.10.10.2:19001',
-    'exp://10.10.10.2:19000',
-    'exp://10.10.10.2:19001',
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
-# Ajusta esto según tus necesidades
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-# Application definition
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8081']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

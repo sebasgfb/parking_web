@@ -23,9 +23,16 @@
             <div class="mb-3">
                 <label for="numero" class="form-label fs-6">Número del Lugar</label>
                 <input type="number" class="form-control col-2" id="numero" name="numero" required>
+                {% if form.numero.errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.numero.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
             <div class="mb-3">
-                <p>Estado Predeterminado: Libre</p>
+                <input type="hidden" name="estado" value="Libre">
             </div>
             <button type="submit" class="btn btn-primary">Crear</button>
             <a href="{% url 'lista_lugares' ubicacion.id %}" class="btn btn-secondary ms-2">Cancelar</a>

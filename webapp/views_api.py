@@ -1,11 +1,12 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
-from rest_framework.decorators import action, api_view
+from rest_framework.decorators import action, api_view, permission_classes
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import login
 from .models import Ubicacion, Lugar, Reserva
 from .serializers import UbicacionSerializer, LugarSerializer, ReservaSerializer, UserSerializer, LoginSerializer
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
 def login_view(request):
@@ -37,7 +38,15 @@ def logout_view(request):
     except IndexError:
         return Response({'detail': 'Token no proporcionado en el encabezado'}, status=status.HTTP_400_BAD_REQUEST)
 
-    
+@api_view(['POST'])
+def crear_reserva(request):
+    serializer = ReservaSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(cliente=request.user)  # Asigna el usuario autenticado como cliente
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class UbicacionViewSet(viewsets.ModelViewSet):
     queryset = Ubicacion.objects.all()
     serializer_class = UbicacionSerializer
@@ -61,8 +70,6 @@ class LugarViewSet(viewsets.ModelViewSet):
 class ReservaViewSet(viewsets.ModelViewSet):
     queryset = Reserva.objects.all()
     serializer_class = ReservaSerializer
-
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all() # Filtrar solo usuarios no administradores
+    queryset = User.objects.filter(is_staff=False)  # Filtrar solo usuarios no administradores
     serializer_class = UserSerializer
-

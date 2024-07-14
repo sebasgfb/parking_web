@@ -38,6 +38,7 @@ def crear_lugar(request, ubicacion_id):
                 return redirect('lista_lugares', ubicacion_id=ubicacion.id)
         else:
             messages.error(request, 'Corrija los errores indicados.')
+            print(form.errors)  # Esto imprime los errores en la consola
     else:
         form = LugarForm()
     
