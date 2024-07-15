@@ -36,11 +36,11 @@ class LoginSerializer(serializers.Serializer):
             user = authenticate(username=username, password=password)
             if user:
                 if not user.is_active:
-                    raise serializers.ValidationError("User account is disabled.")
+                    raise serializers.ValidationError("El usuario esta deshabilitado.")
                 data['user'] = user
             else:
-                raise serializers.ValidationError("Unable to log in with provided credentials.")
+                raise serializers.ValidationError("No se puede iniciar sesión con esas credenciales.")
         else:
-            raise serializers.ValidationError("Must include 'username' and 'password'.")
+            raise serializers.ValidationError("Debes incluir usuario y contraseña")
 
         return data

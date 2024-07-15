@@ -3,8 +3,8 @@
 {% block title %}Detalles del Lugar {{ lugar.numero }}{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="mb-4">Detalles del Lugar {{ lugar.numero }}</h1>
+<div class="container mt-2">
+    <h1 class="mb-4 text-center">Reservas del Lugar {{ lugar.numero }}</h1>
     <div class="text-center"> <!-- Centrado horizontal -->
         <a href="{% url 'lista_lugares' lugar.ubicacion.id %}" class="btn btn-secondary mb-4">Volver a Lugares de {{ lugar.ubicacion.nombre }}</a>
     </div>
@@ -20,15 +20,15 @@
     </div>
     {% endif %}
 
-    <div class="row mb-4">
+    <div class="row">
         <div class="col-md-6">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h2>Crear Nueva Reserva</h2>
+            <div class="card text-center mb-3">
+                <div class="card-body ">
+                    <h5 class="mb-3">Crear Nueva Reserva</h5>
                     <form method="POST">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary mt-3">Reservar</button>
+                        <button type="submit" class="btn btn-primary">Reservar</button>
                     </form>
                 </div>
             </div>
@@ -36,7 +36,7 @@
         <div class="col-md-6">
             <div class="card text-center">
                 <div class="card-body">
-                    <h2>Estado actual del lugar: <span class="badge bg-dark">{{ lugar.estado }}</span></h2>
+                    <h5>Estado actual del lugar: <span class="badge bg-dark">{{ lugar.estado }}</span></h5>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
     {% if reservas %}
     <div class="card">
         <div class="card-body">
-            <h2>Reservas Existentes</h2>
+            <h3 class="text-center mb-3">Reservas Existentes</h3>
             <div class="row">
                 {% for reserva in reservas %}
                 <div class="col-md-6 mb-3">

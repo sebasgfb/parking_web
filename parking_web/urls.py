@@ -8,7 +8,6 @@ urlpatterns = [
     path('iniciar_sesion/', inicio.iniciar_sesion, name='iniciar_sesion'),
     path('registrar_usuario/', inicio.registrar_usuario, name='registrar_usuario'),
     path('bienvenida/', inicio.bienvenida, name='bienvenida'),
-    path('panel/', inicio.panel, name='panel'),
     path('cerrar_sesion/', inicio.cerrar_sesion, name='cerrar_sesion'),
     path('ubicaciones/', ubicaciones.lista_ubicaciones, name='lista_ubicaciones'),
     path('ubicaciones/crear/', ubicaciones.crear_ubicacion, name='crear_ubicacion'),

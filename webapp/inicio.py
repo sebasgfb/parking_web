@@ -7,9 +7,6 @@ from .forms import CustomUserCreationForm
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
-def panel(request):
-    return render(request, 'inicio/panel.html')
-
 def bienvenida(request):
     return render(request, 'inicio/bienvenida.html')
 

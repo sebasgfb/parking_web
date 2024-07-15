@@ -13,7 +13,7 @@ def is_admin(user):
 @login_required
 def lista_lugares(request, ubicacion_id):
     ubicacion = get_object_or_404(Ubicacion, id=ubicacion_id)
-    lugares = Lugar.objects.filter(ubicacion=ubicacion)
+    lugares = Lugar.objects.filter(ubicacion=ubicacion).order_by('numero')
     return render(request, 'lugares/lista_lugares.html', {'ubicacion': ubicacion, 'lugares': lugares})
 
 # Vista para crear un nuevo lugar en una ubicación (solo para administradores)
@@ -38,7 +38,7 @@ def crear_lugar(request, ubicacion_id):
                 return redirect('lista_lugares', ubicacion_id=ubicacion.id)
         else:
             messages.error(request, 'Corrija los errores indicados.')
-            print(form.errors)  # Esto imprime los errores en la consola
+            print(form.errors)
     else:
         form = LugarForm()
     
@@ -50,7 +50,7 @@ def crear_lugar(request, ubicacion_id):
 @user_passes_test(is_admin)
 def eliminar_lugar(request, lugar_id):
     lugar = get_object_or_404(Lugar, id=lugar_id)
-    ubicacion_id = lugar.ubicacion.id  # Guardamos el ID de la ubicación para redireccionar después
+    ubicacion_id = lugar.ubicacion.id
     if request.method == 'POST':
         lugar.delete()
         messages.success(request, 'Lugar eliminado exitosamente.')

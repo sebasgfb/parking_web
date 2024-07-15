@@ -3,8 +3,9 @@
 {% block title %}Lugares de {{ ubicacion.nombre }}{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="mb-4">Lugares de {{ ubicacion.nombre }}</h1>
+<div class="container mt-2">
+    <h1 class="mb-4 text-center">Lugares de {{ ubicacion.nombre }}</h1>
+    <p class="mb-4 text-center">Seleccione algun lugar para ver las reservas o realizar alguna.</p>
     {% if messages %}
     <div class="alert alert-dismissible {% if messages.tags %}alert-{{ messages.tags }}{% endif %}">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -17,9 +18,9 @@
     {% endif %}
     <div class="text-center">
         {% if user.is_authenticated and user.is_staff %}
-            <a href="{% url 'crear_lugar' ubicacion.id %}" class="btn btn-primary mt-3 mb-3">Crear Lugar</a>
+            <a href="{% url 'crear_lugar' ubicacion.id %}" class="btn btn-primary mb-3">Crear Lugar</a>
         {% endif %}
-        <a href="{% url 'lista_ubicaciones' %}" class="btn btn-secondary mt-3 mb-3">Volver a Ubicaciones</a>
+        <a href="{% url 'lista_ubicaciones' %}" class="btn btn-secondary mb-3">Volver a Ubicaciones</a>
         <div class="row">
             {% for lugar in lugares %}
             <div class="col-md-6 mb-4">

@@ -11,7 +11,7 @@ def is_admin(user):
 # Vista para listar ubicaciones
 @login_required
 def lista_ubicaciones(request):
-    ubicaciones = Ubicacion.objects.all()
+    ubicaciones = Ubicacion.objects.all().order_by('nombre')
     return render(request, 'ubicaciones/lista_ubicaciones.html', {'ubicaciones': ubicaciones})
 
 # Vista para crear una nueva ubicación (solo para administradores)

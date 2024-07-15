@@ -21,13 +21,8 @@ def login_view(request):
 @api_view(['POST'])
 def logout_view(request):
     try:
-        # Obtener el token de autenticación del encabezado Authorization
         auth_token = request.headers.get('Authorization', '').split(' ')[1]
-
-        # Buscar el token en la base de datos
         token = Token.objects.get(key=auth_token)
-
-        # Eliminar el token
         token.delete()
 
         return Response({'detail': 'Logout exitoso'}, status=status.HTTP_200_OK)

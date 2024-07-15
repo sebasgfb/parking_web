@@ -11,9 +11,9 @@ def is_admin(user):
 @login_required
 def detalle_lugar(request, lugar_id):
     lugar = get_object_or_404(Lugar, id=lugar_id)
-    lugar.actualizar_estado()  # Actualizar el estado del lugar
+    lugar.actualizar_estado()
 
-    reservas = Reserva.objects.filter(lugar=lugar).order_by('fecha_reserva')  # Ordenar las reservas por fecha_reserva
+    reservas = Reserva.objects.filter(lugar=lugar).order_by('fecha_reserva')
 
     if request.method == 'POST':
         form = ReservaForm(request.POST)
